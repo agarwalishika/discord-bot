@@ -106,5 +106,22 @@ async def on_message(message):
       dict = PyDictionary()
       await message.channel.send(dict.meaning(word))
 
+    if message.content.startswith('!hey celebrate'):
+      await message.channel.send('how much?')
+      l = await client.wait_for('message')
+      level = int(l.content)
+      emojis = ['partying_face', 'star_struck', 'exploding_head', 'hugging', 'clap',
+                'crown', 'star', 'star2', 'rainbow', 'medal', 'fireworks', 'sparkler', 'stars',
+                'confetti_ball', 'tada', 'orange_heart', '100']
+      
+      import random
+      times = random.randint(level,level*10)
+      mess = ""
+      for _ in range(times):
+        em = random.randint(0, len(emojis)-1)
+        mess = mess + ":" + emojis[em] + ": "
+      
+      await message.channel.send(mess)
+
 keep_alive()
 client.run(os.getenv('TOKEN'))
