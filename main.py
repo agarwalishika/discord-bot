@@ -99,6 +99,12 @@ async def on_message(message):
       thr = thread(msg, numSeconds, message)
       loop = asyncio.get_event_loop()
       loop.create_task(thr.run())
+    
+    if message.content.startswith('!hey define'):
+      word = message.content[12:]
+      from PyDictionary import PyDictionary
+      dict = PyDictionary()
+      await message.channel.send(dict.meaning(word))
 
 keep_alive()
 client.run(os.getenv('TOKEN'))
