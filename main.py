@@ -106,7 +106,7 @@ async def on_message(message):
       dict = PyDictionary()
 
       definition = dict.meaning(word)
-      if definition == "":
+      if definition == None:
         import urbandict
         definition = urbandict.define(word)
       await message.channel.send(definition)
