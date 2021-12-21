@@ -104,7 +104,12 @@ async def on_message(message):
       word = message.content[12:]
       from PyDictionary import PyDictionary
       dict = PyDictionary()
-      await message.channel.send(dict.meaning(word))
+
+      definition = dict.meaning(word)
+      if definition == "":
+        import urbandict
+        definition = urbandict.define(word)
+      await message.channel.send(definition)
 
     if message.content.startswith('!hey celebrate'):
       await message.channel.send('how much?')
